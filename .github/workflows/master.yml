@@ -32,7 +32,7 @@ jobs:
         id: information
         run: |
           echo "::set-output name=timestamp::$(date +%s)"
-          echo "::set-output name=date::$(date +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "::set-output name=date::$(date +"%Y-%m-%dT%H-%M-%SZ")"
           echo "::set-output name=commit::$GITHUB_SHA"
 
       - name: Checkout apache/iotdb

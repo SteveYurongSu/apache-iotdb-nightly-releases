@@ -1,4 +1,4 @@
-name: Build Apache IoTDB Releases (Unoffical)
+name: Build Apache IoTDB Nightly Releases (Unoffical)
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       max-parallel: 20
       matrix:
-        java: [ 8 ]
+        java: [ 8, 11, 17 ]
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
@@ -50,13 +50,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.timestamp.outputs.date }}
-          release_name: apache iotdb nightly build ${{ steps.timestamp.outputs.date }} (unoffical)
+          tag_name: ${{ steps.timestamp.outputs.date }}-${{ matrix.java }}
+          release_name: Apache IoTDB Nightly Release ${{ steps.timestamp.outputs.date }}-jdk-${{ matrix.java }} (Unoffical)
           body: |
-            apache iotdb nightly build (unoffical)
+            Apache IoTDB Nightly Release (Unoffical)
             build date: ${{ steps.timestamp.outputs.date }}
-            version: ${{ steps.timestamp.outputs.date }}
-            OS support: Linux
+            JDK version: ${{ matrix.java }}
           draft: false
           prerelease: false
 
@@ -68,5 +67,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-all-bin.zip
-          asset_name: apache-iotdb-nightly-${{ steps.timestamp.outputs.date }}.zip
+          asset_name: apache-iotdb-nightly-${{ steps.timestamp.outputs.date }}-jdk-${{ matrix.java }}.zip
           asset_content_type: application/zip

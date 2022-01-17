@@ -1,0 +1,72 @@
+name: Build Apache IoTDB Releases (Unoffical)
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+env:
+  MAVEN_OPTS: -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        java: [ 8 ]
+        os: [ ubuntu-latest ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
+      - name: Get current timestamp
+        id: timestamp
+        run: |
+          echo "::set-output name=timestamp::$(date +%s)"
+          echo "::set-output name=date::$(date +%Y%m%d)"
+
+      - name: Checkout apache/iotdb
+        uses: actions/checkout@v2
+        with:
+          repository: 'apache/iotdb'
+          fetch-depth: 0
+
+      - name: Build binary
+        id: build_binary
+        run:  mvn clean package -pl distribution -am -DskipTests
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.timestamp.outputs.date }}
+          release_name: apache iotdb nightly build ${{ steps.timestamp.outputs.date }} (unoffical)
+          body: |
+            apache iotdb nightly build (unoffical)
+            build date: ${{ steps.timestamp.outputs.date }}
+            version: ${{ steps.timestamp.outputs.date }}
+            OS support: Linux
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-all-bin.zip
+          asset_name: apache-iotdb-nightly-${{ steps.timestamp.outputs.date }}.zip
+          asset_content_type: application/zip

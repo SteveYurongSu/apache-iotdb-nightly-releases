@@ -42,7 +42,7 @@ jobs:
 
       - name: Build binary
         id: build_binary
-        run:  mvn clean package -pl distribution -am -DskipTests
+        run: mvn clean package -pl distribution -am -DskipTests
 
       - name: Create Release
         id: create_release
@@ -50,12 +50,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.timestamp.outputs.date }}-${{ matrix.java }}
-          release_name: Apache IoTDB Nightly Release ${{ steps.timestamp.outputs.date }}-jdk-${{ matrix.java }} (Unoffical)
+          tag_name: ${{ steps.timestamp.outputs.date }}-java-${{ matrix.java }}
+          release_name: Apache IoTDB Nightly Release ${{ steps.timestamp.outputs.date }} (Java ${{ matrix.java }}) (Unoffical)
           body: |
             Apache IoTDB Nightly Release (Unoffical)
-            build date: ${{ steps.timestamp.outputs.date }}
-            JDK version: ${{ matrix.java }}
+            Build date: ${{ steps.timestamp.outputs.date }}
+            Java version: ${{ matrix.java }}
           draft: false
           prerelease: false
 
@@ -67,5 +67,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-all-bin.zip
-          asset_name: apache-iotdb-nightly-${{ steps.timestamp.outputs.date }}-jdk-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-nightly-${{ steps.timestamp.outputs.date }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip

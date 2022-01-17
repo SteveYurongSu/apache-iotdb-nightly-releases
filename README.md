@@ -12,15 +12,19 @@ Download Apache IoTDB nightly releases **[👉 here 👈](https://github.com/Ste
 
 ## Version Support
 
-* 🟢 means compatible
-* ❌ means incompatible
-* ❓ means unknown
+🟢 means compatible
+
+
+❌ means incompatible
+
+
+❓ means unknown
 
 
 
 ### Apache IoTDB 0.12.x
 
-* [📚 Documentation](https://iotdb.apache.org/UserGuide/V0.12.x/QuickStart/QuickStart.html)
+[📚 Documentation](https://iotdb.apache.org/UserGuide/V0.12.x/QuickStart/QuickStart.html)
 
 | Java version | Compatibility |
 | :------------- | :-------------: |
@@ -32,7 +36,7 @@ Download Apache IoTDB nightly releases **[👉 here 👈](https://github.com/Ste
 
 ### Apache IoTDB 0.13.x
 
-* [📚 Documentation](https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html)
+[📚 Documentation](https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html)
 
 | Java version | Compatibility |
 | :------------- | :-------------: |

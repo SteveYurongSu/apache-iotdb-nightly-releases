@@ -60,7 +60,6 @@ jobs:
           prerelease: false
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-all-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,7 +70,6 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-cli-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -82,7 +80,6 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-client-cpp-mac-x86_64-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -93,7 +90,6 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-cluster-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -104,7 +100,6 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-grafana-connector-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -115,7 +110,6 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-grafana-plugin-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -126,7 +120,6 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-server-bin.zip
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

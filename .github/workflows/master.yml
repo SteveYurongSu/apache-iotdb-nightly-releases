@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "::set-output name=timestamp::$(date +%s)"
           echo "::set-output name=date::$(date +"%Y-%m-%d-%H-%M-%S")"
-          echo "::set-output name=commit::$GITHUB_SHA"
+          echo "::set-output name=commit::$(git rev-parse --short HEAD)"
 
       - name: Build binary
         id: build_binary
@@ -51,8 +51,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.information.outputs.date }}-java-${{ matrix.java }}
-          release_name: Apache IoTDB Nightly Release ${{ steps.information.outputs.date }} (Java ${{ matrix.java }}) (Unoffical)
+          tag_name: ${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}
+          release_name: Apache IoTDB Nightly Release (UTC+0 ${{ steps.information.outputs.date }}) (Java ${{ matrix.java }}) (Unoffical)
           body: |
             Apache IoTDB Nightly Release (Unoffical)
             Branch: [master](https://github.com/apache/iotdb)
@@ -69,7 +69,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-all-bin.zip
-          asset_name: apache-iotdb-0.13.0-SNAPSHOT-all-bin-nightly-${{ steps.information.outputs.date }}-java-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-0.13.0-SNAPSHOT-all-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-cli-bin.zip
@@ -79,7 +79,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-cli-bin.zip
-          asset_name: apache-iotdb-0.13.0-SNAPSHOT-cli-bin-nightly-${{ steps.information.outputs.date }}-java-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-0.13.0-SNAPSHOT-cli-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-cluster-bin.zip
@@ -89,7 +89,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-cluster-bin.zip
-          asset_name: apache-iotdb-0.13.0-SNAPSHOT-cluster-bin-nightly-${{ steps.information.outputs.date }}-java-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-0.13.0-SNAPSHOT-cluster-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-grafana-connector-bin.zip
@@ -99,7 +99,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-grafana-connector-bin.zip
-          asset_name: apache-iotdb-0.13.0-SNAPSHOT-grafana-connector-bin-nightly-${{ steps.information.outputs.date }}-java-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-0.13.0-SNAPSHOT-grafana-connector-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-grafana-plugin-bin.zip
@@ -109,7 +109,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-grafana-plugin-bin.zip
-          asset_name: apache-iotdb-0.13.0-SNAPSHOT-grafana-plugin-bin-nightly-${{ steps.information.outputs.date }}-java-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-0.13.0-SNAPSHOT-grafana-plugin-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip
 
       - name: Upload apache-iotdb-0.13.0-SNAPSHOT-server-bin.zip
@@ -119,5 +119,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: distribution/target/apache-iotdb-0.13.0-SNAPSHOT-server-bin.zip
-          asset_name: apache-iotdb-0.13.0-SNAPSHOT-server-bin-nightly-${{ steps.information.outputs.date }}-java-${{ matrix.java }}.zip
+          asset_name: apache-iotdb-0.13.0-SNAPSHOT-server-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip

@@ -28,18 +28,18 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
 
-      - name: Generate release information
-        id: information
-        run: |
-          echo "::set-output name=timestamp::$(date +%s)"
-          echo "::set-output name=date::$(date +"%Y-%m-%dT%H-%M-%SZ")"
-          echo "::set-output name=commit::$GITHUB_SHA"
-
       - name: Checkout apache/iotdb
         uses: actions/checkout@v2
         with:
           repository: 'apache/iotdb'
           fetch-depth: 0
+
+      - name: Generate release information
+        id: information
+        run: |
+          echo "::set-output name=timestamp::$(date +%s)"
+          echo "::set-output name=date::$(date +"%Y-%m-%d-%H-%M-%S")"
+          echo "::set-output name=commit::$GITHUB_SHA"
 
       - name: Build binary
         id: build_binary
@@ -55,9 +55,9 @@ jobs:
           release_name: Apache IoTDB Nightly Release ${{ steps.information.outputs.date }} (Java ${{ matrix.java }}) (Unoffical)
           body: |
             Apache IoTDB Nightly Release (Unoffical)
-            Branch: master
+            Branch: [master](https://github.com/apache/iotdb)
             Commit ID: ${{ steps.information.outputs.commit }}
-            Build date: ${{ steps.information.outputs.date }}
+            Build date: UTC+0 ${{ steps.information.outputs.date }}
             Java version: ${{ matrix.java }}
           draft: false
           prerelease: false

@@ -9,7 +9,13 @@ Download Apache IoTDB nightly releases **[👉 here 👈](https://github.com/Ste
 
 
 
-## Version Support
+## Want to get the latest binaries?
+
+Creating a new issue [**here**](https://github.com/SteveYurongSu/apache-iotdb-nightly-releases/issues/new) with any content will automatically trigger a new build!
+
+![](https://user-images.githubusercontent.com/30497621/149944816-74e8aa6d-44bc-4a28-9c3c-32798a8d688a.png)
+
+## Version support
 
 🟢 means compatible
 

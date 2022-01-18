@@ -15,22 +15,25 @@ env:
 
 jobs:
   pre-add-comment:
-    if: ${{ github.event.issue && !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
       - name: Add comment
+        if: ${{ github.event.issue && !github.event.issue.pull_request }}
         uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Thanks for trying the Apache IoTDB nightly releases! 😆
-            New releases are building now, just for you! ❤️
-            The building process may take about 10 minutes. ⌚️
-            I will notice you when the building process is done. ⏰
+            Thanks for trying the Apache IoTDB nightly releases!  😆
 
-  build12:
+            New releases are building now, just for you!  ❤️
+
+            The building process may take about 10 minutes.  ⌚️
+
+            I will notice you when the building process is done.  ⏰
+
+  build-0-12:
     # https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs
     needs: pre-add-comment
 
@@ -134,7 +137,7 @@ jobs:
           asset_name: apache-iotdb-0.12.5-SNAPSHOT-server-bin-nightly-${{ steps.information.outputs.date }}-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}.zip
           asset_content_type: application/zip
 
-  build13:
+  build-0-13:
     # https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs
     needs: pre-add-comment
 
@@ -250,16 +253,18 @@ jobs:
   post-add-comment:
     # https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs
     needs: [ build12, build13 ]
-    if: ${{ github.event.issue && !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
       - name: Add comment
+        if: ${{ github.event.issue && !github.event.issue.pull_request }}
         uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Thanks for waiting! 😆
-            New releases are now ready for you! ❤️
-            Visit **[👉 here 👈](https://github.com/SteveYurongSu/apache-iotdb-nightly-releases/releases)** to download. Enjoy! 🎉
+            Thanks for waiting!  😆
+
+            New releases are now ready for you!  ❤️
+
+            Visit **[👉 here 👈](https://github.com/SteveYurongSu/apache-iotdb-nightly-releases/releases)** to download. Enjoy!  🎉

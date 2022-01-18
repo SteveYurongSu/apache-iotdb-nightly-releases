@@ -15,7 +15,7 @@ env:
 
 jobs:
   pre-add-comment:
-    if: ${{ !github.event.issue.pull_request }}
+    if: ${{ github.event.issue && !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -250,7 +250,7 @@ jobs:
   post-add-comment:
     # https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs
     needs: [ build12, build13 ]
-    if: ${{ !github.event.issue.pull_request }}
+    if: ${{ github.event.issue && !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     permissions:
       issues: write

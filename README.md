@@ -1,7 +1,7 @@
 # 🚀 Apache IoTDB Nightly Releases (Unofficial) 
 
 ![Downloads](https://img.shields.io/github/downloads/SteveYurongSu/apache-iotdb-nightly-releases/total.svg?style=flat&labelColor=323940&color=brightgreen&logo=github)
-![Workflows](https://github.com/SteveYurongSu/apache-iotdb-nightly-releases/actions/workflows/master.yml/badge.svg)
+![Workflows](https://github.com/SteveYurongSu/apache-iotdb-nightly-releases/actions/workflows/build.yml/badge.svg)
 
 ## TL;DR
 

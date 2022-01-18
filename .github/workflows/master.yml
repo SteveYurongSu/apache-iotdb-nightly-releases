@@ -268,3 +268,15 @@ jobs:
             New releases are now ready for you!  ❤️
 
             Visit **[👉 here 👈](https://github.com/SteveYurongSu/apache-iotdb-nightly-releases/releases)** to download. Enjoy!  🎉
+
+  close-issue:
+    needs: post-add-comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close issue
+        if: ${{ github.event.issue && !github.event.issue.pull_request }}
+        uses: peter-evans/close-issue@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: |
+            Auto-closing this issue.

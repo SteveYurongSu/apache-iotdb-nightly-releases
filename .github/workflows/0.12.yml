@@ -7,6 +7,8 @@ on:
   schedule:
     - cron: "0 12 * * *"
   workflow_dispatch:
+  issues:
+    types: [ opened ]
 
 env:
   MAVEN_OPTS: -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3
@@ -53,9 +55,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.information.outputs.date }}-0.12-${{ steps.information.outputs.commit }}-java-${{ matrix.java }}
-          release_name: Apache IoTDB 0.12 Nightly Release (UTC+0 ${{ steps.information.outputs.date }}) (Java ${{ matrix.java }}) (Unoffical)
+          release_name: Apache IoTDB 0.12 Nightly Release (UTC+0 ${{ steps.information.outputs.date }}) (Java ${{ matrix.java }}) (Unofficial)
           body: |
-            Apache IoTDB Nightly Release (Unoffical)
+            Apache IoTDB Nightly Release (Unofficial)
             Branch: [rel/0.12](https://github.com/apache/iotdb/tree/rel/0.12)
             Commit ID: [${{ steps.information.outputs.commit }}](https://github.com/apache/iotdb/commit/${{ steps.information.outputs.commit }})
             Build date: UTC+0 ${{ steps.information.outputs.date }}

@@ -252,7 +252,7 @@ jobs:
 
   post-add-comment:
     # https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs
-    needs: [ build12, build13 ]
+    needs: [ build-0-12, build-0-13 ]
     runs-on: ubuntu-latest
     permissions:
       issues: write

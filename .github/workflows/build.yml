@@ -160,6 +160,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'apache/iotdb'
+          ref: rel/0.13
           fetch-depth: 0
 
       - name: Generate release information

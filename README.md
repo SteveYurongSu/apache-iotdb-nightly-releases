@@ -55,7 +55,7 @@ Check and report your issues [here](https://github.com/apache/iotdb/issues). ✔
 
 ### Apache IoTDB 0.13.x
 
-[📚 Documentation](https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html)
+[📚 Documentation](https://iotdb.apache.org/UserGuide/V0.13.x/QuickStart/QuickStart.html)
 
 | Java version | Compatibility |
 | :------------- | :-------------: |
